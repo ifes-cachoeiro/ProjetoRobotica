@@ -7,14 +7,14 @@
 int frequency = 0;
 
 //motor_A
-int IN1 = 8;
-int IN2 = 9;
-int velocidadeA = 2;
+int IN1 = 7;
+int IN2 = 8;
+int velocidadeA = 9;
 
 //motor_B
 int IN3 = 10;
 int IN4 = 11;
-int velocidadeB = 3;
+int velocidadeB = 12;
 
 //variavel auxiliar
 int velocidade = 0;
