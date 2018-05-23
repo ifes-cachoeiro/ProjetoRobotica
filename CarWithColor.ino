@@ -106,9 +106,8 @@ void calibraSensor() {
 
 }
 
-void ligarM(int i) {
+void ligarM(int vel) {
 
-  if (i == 1) {
     //Sentido 2
     digitalWrite(IN1, HIGH);
     digitalWrite(IN2, LOW);
@@ -117,28 +116,10 @@ void ligarM(int i) {
     digitalWrite(IN3, LOW);
     digitalWrite(IN4, HIGH);
 
-    analogWrite(velocidadeA, 255);
-    analogWrite(velocidadeB, 255);
+    analogWrite(velocidadeA, vel);
+    analogWrite(velocidadeB, vel);
 
     delay(500);
-
-  } else {
-    
-    //Sentido 2
-    digitalWrite(IN1, HIGH);
-    digitalWrite(IN2, LOW);
-
-    //Sentido 2
-    digitalWrite(IN3, LOW);
-    digitalWrite(IN4, HIGH);
-
-    analogWrite(velocidadeA, 0);
-    analogWrite(velocidadeB, 0);
-
-    delay(500);
-
-  }
-
 
 }
 
@@ -175,19 +156,20 @@ void loop() {
   frequency = pulseIn(sensorOut, LOW);
   Serial.println(frequency);
 
-
   if (frequency <= branco) {
     Serial.println("Branco");
-    ligarM(1);
+    ligarM(200);
   } else if (frequency <= azul) {
     Serial.println("Blue");
-
+    ligarM(150);
   } else if (frequency <= vermelho) {
     Serial.println("Red");
-
+    ligarM(0);
+    delay(4500);
+    ligarM(200);
   } else if (frequency <= verde) {
     Serial.println("Green");
-
+    ligarM(255);
   } else {
     Serial.println("Black");
     ligarM(0);
