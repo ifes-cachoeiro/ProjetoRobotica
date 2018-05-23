@@ -1,3 +1,12 @@
+/*
+   Cores:
+   Branco -> padrão (150)
+   Vermelho -> para por 5 segundos e depois anda 2 segundos
+   Verde -> velocidade máxima (255)
+   Azul -> velocidade mínima (50)
+   Preto -> encerra a corrida
+*/
+
 #define S0 7
 #define S1 6
 #define S2 3
@@ -97,6 +106,42 @@ void calibraSensor() {
 
 }
 
+void ligarM(int i) {
+
+  if (i == 1) {
+    //Sentido 2
+    digitalWrite(IN1, HIGH);
+    digitalWrite(IN2, LOW);
+
+    //Sentido 2
+    digitalWrite(IN3, LOW);
+    digitalWrite(IN4, HIGH);
+
+    analogWrite(velocidadeA, 255);
+    analogWrite(velocidadeB, 255);
+
+    delay(500);
+
+  } else {
+    
+    //Sentido 2
+    digitalWrite(IN1, HIGH);
+    digitalWrite(IN2, LOW);
+
+    //Sentido 2
+    digitalWrite(IN3, LOW);
+    digitalWrite(IN4, HIGH);
+
+    analogWrite(velocidadeA, 0);
+    analogWrite(velocidadeB, 0);
+
+    delay(500);
+
+  }
+
+
+}
+
 //Inicializa Pinos
 void setup() {
 
@@ -133,40 +178,19 @@ void loop() {
 
   if (frequency <= branco) {
     Serial.println("Branco");
+    ligarM(1);
   } else if (frequency <= azul) {
     Serial.println("Blue");
+
   } else if (frequency <= vermelho) {
     Serial.println("Red");
+
   } else if (frequency <= verde) {
     Serial.println("Green");
+
   } else {
     Serial.println("Black");
+    ligarM(0);
   }
-
-  /*Exemplo de velocidades no motor A*/
-
-  //Sentido 2
-  digitalWrite(IN1, HIGH);
-  digitalWrite(IN2, LOW);
-
-  //Sentido 2
-  digitalWrite(IN3, LOW);
-  digitalWrite(IN4, HIGH);
-  /*
-    //velocidade de 0 a 255
-    while (velocidadeA < 255) {
-      analogWrite(velocidadeA, velocidade);
-      analogWrite(velocidadeB, velocidade);
-      velocidade = velocidade + 10;
-      delay(50);
-    }
-
-    //velocidade de 255 a 0
-    while (velocidadeA > 0) {
-      analogWrite(velocidadeA, velocidade);
-      analogWrite(velocidadeB, velocidade);
-      velocidade = velocidade - 10;
-      delay(50);
-    }*/
 
 }
