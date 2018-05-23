@@ -1,5 +1,5 @@
-#define S0 6
-#define S1 7
+#define S0 7
+#define S1 6
 #define S2 3
 #define S3 4
 #define sensorOut 5
@@ -13,18 +13,19 @@ int verde = 0;
 int preto = 0;
 
 int frequency = 0;
+int cont = 0;
 
-//motor_A
+//Motor_A
 int IN1 = 7;
 int IN2 = 8;
 int velocidadeA = 9;
 
-//motor_B
+//Motor_B
 int IN3 = 10;
 int IN4 = 11;
 int velocidadeB = 12;
 
-//variavel auxiliar
+//Variavel auxiliar
 int velocidade = 0;
 
 void calibraSensor() {
@@ -50,8 +51,6 @@ void calibraSensor() {
       }
     }
 
-    Serial.println("Teste");
-
     switch (inChar) {
       case 'A':
         Serial.println("Lendo Red");
@@ -59,7 +58,7 @@ void calibraSensor() {
         digitalWrite(S3, HIGH);
         // Reading the output frequency
         frequency = pulseIn(sensorOut, LOW);
-        vermelho = frequency + 10;
+        vermelho = frequency + 5;
         Serial.println(vermelho);
         break;
       case 'B':
@@ -68,7 +67,8 @@ void calibraSensor() {
         digitalWrite(S3, HIGH);
         // Reading the output frequency
         frequency = pulseIn(sensorOut, LOW);
-        azul = frequency + 10;
+        azul = frequency + 5;
+        Serial.println(azul);
         break;
       case 'C':
         Serial.println("Lendo Green");
@@ -76,7 +76,8 @@ void calibraSensor() {
         digitalWrite(S3, HIGH);
         // Reading the output frequency
         frequency = pulseIn(sensorOut, LOW);
-        verde = frequency + 10;
+        verde = frequency + 5;
+        Serial.println(verde);
         break;
       case 'D':
         Serial.println("Lendo White");
@@ -84,7 +85,8 @@ void calibraSensor() {
         digitalWrite(S3, HIGH);
         // Reading the output frequency
         frequency = pulseIn(sensorOut, LOW);
-        branco = frequency + 10;
+        branco = frequency + 5;
+        Serial.println(branco);
         break;
       case 'E':
         Serial.println("Saindo");
@@ -116,43 +118,18 @@ void setup() {
   pinMode(velocidadeA, OUTPUT);
   pinMode(velocidadeB, OUTPUT);
 
+  calibraSensor();
+
 }
 
 void loop() {
 
-  calibraSensor();
-
-  digitalWrite(S2, LOW);
-  digitalWrite(S3, LOW);
-  // Reading the output frequency
-  frequency = pulseIn(sensorOut, LOW);
-  // Printing the value on the serial monitor
-  Serial.print("R= ");//printing name
-  Serial.print(frequency);//printing RED color frequency
-  Serial.print("  ");
-  delay(100);
-
-  // Setting Green filtered photodiodes to be read
-  digitalWrite(S2, HIGH);
-  digitalWrite(S3, HIGH);
-  // Reading the output frequency
-  frequency = pulseIn(sensorOut, LOW);
-  // Printing the value on the serial monitor
-  Serial.print("G= ");//printing name
-  Serial.print(frequency);//printing RED color frequency
-  Serial.print("  ");
-  delay(100);
-
-  // Setting Blue filtered photodiodes to be read
   digitalWrite(S2, LOW);
   digitalWrite(S3, HIGH);
   // Reading the output frequency
   frequency = pulseIn(sensorOut, LOW);
-  // Printing the value on the serial monitor
-  Serial.print("B= ");//printing name
-  Serial.print(frequency);//printing RED color frequency
-  Serial.println("  ");
-  delay(100);
+  Serial.println(frequency);
+
 
   if (frequency <= branco) {
     Serial.println("Branco");
@@ -175,22 +152,21 @@ void loop() {
   //Sentido 2
   digitalWrite(IN3, LOW);
   digitalWrite(IN4, HIGH);
+  /*
+    //velocidade de 0 a 255
+    while (velocidadeA < 255) {
+      analogWrite(velocidadeA, velocidade);
+      analogWrite(velocidadeB, velocidade);
+      velocidade = velocidade + 10;
+      delay(50);
+    }
 
-  //velocidade de 0 a 255
-  while (velocidadeA < 255) {
-    analogWrite(velocidadeA, velocidade);
-    analogWrite(velocidadeB, velocidade);
+    //velocidade de 255 a 0
+    while (velocidadeA > 0) {
+      analogWrite(velocidadeA, velocidade);
+      analogWrite(velocidadeB, velocidade);
+      velocidade = velocidade - 10;
+      delay(50);
+    }*/
 
-    velocidade = velocidade + 10;
-    delay(50);
-  }
-
-  //velocidade de 255 a 0
-  while (velocidadeA > 0) {
-    analogWrite(velocidadeA, velocidade);
-    analogWrite(velocidadeB, velocidade);
-
-    velocidade = velocidade - 10;
-    delay(50);
-  }
 }
