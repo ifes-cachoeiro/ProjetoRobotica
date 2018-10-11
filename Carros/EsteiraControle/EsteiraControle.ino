@@ -97,7 +97,7 @@ void loop() {
 
     //Porta da Ponte H e Velocidade
     analogWrite(8, 50);
-    analogWrite(8, 50);
+    analogWrite(9, 50);
 
     if (valorRec == 1) {
       Serial.println("Frente");
