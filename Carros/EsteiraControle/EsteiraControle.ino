@@ -96,11 +96,11 @@ void loop() {
     Serial.println(results.value);
 
     //Porta da Ponte H e Velocidade
-    analogWrite(8, 50);
-    analogWrite(9, 50);
+    analogWrite(9, 100);
+    analogWrite(10, 100);
 
     if (valorRec == 1) {
-      Serial.println("Frente");
+      Serial.println("Para");
       digitalWrite(IN1, LOW);
       digitalWrite(IN2, LOW);
       digitalWrite(IN3, LOW);
