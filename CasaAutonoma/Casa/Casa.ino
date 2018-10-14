@@ -24,7 +24,6 @@ int pinoled2 = 6;
 int pinoled3 = 7;
 int pinoled4 = 8;
 
-
 void SensorLuz() {
 
   ldrValor = analogRead(ldrPin); //O valor lido será entre 0 e 1023
