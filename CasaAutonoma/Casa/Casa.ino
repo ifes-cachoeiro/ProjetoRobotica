@@ -5,7 +5,7 @@
 #define SS_PIN 10
 #define RST_PIN 9
 MFRC522 mfrc522(SS_PIN, RST_PIN);  // Create MFRC522 instance.
-char st[20];
+char st[20]; //
 
 int ldrPin = 0; //LDR no pino analígico 8
 int ldrValor = 0; //Valor lido do LDR
